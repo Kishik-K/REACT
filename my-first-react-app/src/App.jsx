@@ -1,6 +1,6 @@
 const Card = ({ title }) => {
   return (
-    <div>
+    <div className="card">
       <h2>{title}</h2>
     </div>
   );
@@ -8,12 +8,11 @@ const Card = ({ title }) => {
 
 const App = () => {
   return (
-    <>
-      <h2>Welcome to React</h2>
+    <div className="app">
       <Card title="STAR WARS" />
       <Card title="THE LORD OF THE RINGS" />
       <Card title="THE HUNGER GAMES" />
-    </>
+    </div>
   );
 };
 
