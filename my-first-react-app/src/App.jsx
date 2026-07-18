@@ -1,11 +1,20 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-import "./App.css";
+const Card = ({ title }) => {
+  return (
+    <div>
+      <h2>{title}</h2>
+    </div>
+  );
+};
 
 const App = () => {
-  return <h2>Welcome to React</h2>;
+  return (
+    <>
+      <h2>Welcome to React</h2>
+      <Card title="STAR WARS" />
+      <Card title="THE LORD OF THE RINGS" />
+      <Card title="THE HUNGER GAMES" />
+    </>
+  );
 };
 
 export default App;
