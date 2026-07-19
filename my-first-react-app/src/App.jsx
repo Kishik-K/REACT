@@ -74,7 +74,9 @@ function App() {
           ) : (
             <ul>
               {movieList.map((movie) => (
-                <p className="text-white">{movie.title}</p>
+                <p key={movie.id} className="text-white">
+                  {movie.title}
+                </p>
               ))}
             </ul>
           )}
