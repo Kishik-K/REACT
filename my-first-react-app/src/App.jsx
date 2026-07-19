@@ -1,4 +1,5 @@
 import React from "react";
+import Search from "./components/search";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
             Find what you <span className="text-gradient">desire</span>
           </h1>
         </header>
-        <p>SEARCH</p>
+        <Search />
       </div>
     </main>
   );
