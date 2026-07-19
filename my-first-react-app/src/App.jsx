@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Search from "./components/search";
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <main>
       <div className="pattern" />
@@ -12,7 +14,7 @@ function App() {
             Find what you <span className="text-gradient">desire</span>
           </h1>
         </header>
-        <Search />
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>
     </main>
   );
