@@ -9,7 +9,7 @@ function MovieCard({
         src={
           poster_path
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
-            : "/no-movie.jpg"
+            : "/no-movie.png"
         }
         alt={title}
       />
