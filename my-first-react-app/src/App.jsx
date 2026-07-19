@@ -6,6 +6,7 @@ function App() {
       <div className="pattern" />
       <div className="wrapper">
         <header>
+          <img src="./hero.png" alt="Hero Banner" />
           <h1>
             Find what you <span className="text-gradient">desire</span>
           </h1>
