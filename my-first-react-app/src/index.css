@@ -34,3 +34,12 @@ h2 {
   margin: 10px;
   border-radius: 5px;
 }
+
+button {
+  border: none;
+  font-size: 20px;
+  width: 60px;
+  text-align: center;
+  background-color: #d0caca;
+  cursor: pointer;
+}
