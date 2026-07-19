@@ -13,6 +13,14 @@ function MovieCard({
         }
         alt={title}
       />
+      <div className="mt-4">
+        <h3>{title}</h3>
+        <div className="content"></div>
+        <div className="rating">
+          <img src="/star.png" alt="Rating" />
+          <p>{vote_average ? vote_average.toFixed(1) : "N/A"}</p>
+        </div>
+      </div>
     </div>
   );
 }
