@@ -3,6 +3,7 @@ import Search from "./components/search";
 import Spinner from "./components/spinner";
 import MovieCard from "./components/movieCard";
 import { useDebounce } from "use-debounce";
+import { updateSearchCount } from "./appwrite";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -45,6 +46,7 @@ function App() {
 
       setMovieList(data.results || []);
       setIsLoading(false);
+      updateSearchCount(); // Call the function to update search count
       //catch
     } catch (error) {
       console.error("Error fetching movies:", error);
