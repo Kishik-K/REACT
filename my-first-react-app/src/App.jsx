@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Search from "./components/search";
 import Spinner from "./components/spinner";
+import movieCard from "./components/movieCard";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
