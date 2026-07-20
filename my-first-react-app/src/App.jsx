@@ -21,6 +21,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [trendingMovies, setTrendingMovies] = useState([]);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
   const fetchMovies = async (query = "") => {
