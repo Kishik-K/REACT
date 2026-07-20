@@ -68,6 +68,12 @@ function App() {
     }
   };
 
+  const goHome = () => {
+    setSearchTerm("");
+    setSelectedMovieId(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   useEffect(() => {
     fetchMovies(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
@@ -78,6 +84,17 @@ function App() {
 
   return (
     <main>
+      <a
+        href="/"
+        className="site-logo"
+        onClick={(e) => {
+          e.preventDefault();
+          goHome();
+        }}
+      >
+        <img src="/logo.png" alt="Le Carnet" />
+      </a>
+
       <div className="pattern" />
       <div className="wrapper">
         <header>

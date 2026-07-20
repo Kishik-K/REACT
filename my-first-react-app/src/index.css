@@ -79,6 +79,26 @@
       cover,
       120px 120px;
   }
+  .site-logo {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    z-index: 50;
+    display: block;
+    cursor: pointer;
+
+    & img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+      transition: transform 0.2s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
 
   .wrapper {
     @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
