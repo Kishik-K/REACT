@@ -2,9 +2,10 @@ import React from "react";
 
 function MovieCard({
   movie: { title, vote_average, poster_path, release_date, original_language },
+  onClick,
 }) {
   return (
-    <div className="movie-card">
+    <div className="movie-card cursor-pointer" onClick={onClick}>
       <img
         src={
           poster_path

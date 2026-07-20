@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Search from "./components/search";
 import Spinner from "./components/spinner";
 import MovieCard from "./components/movieCard";
+import MovieModal from "./components/movieModal";
 import { useDebounce } from "use-debounce";
 import { updateSearchCount, getTrendingMovies } from "./appwrite";
 
@@ -16,17 +17,17 @@ const API_OPTIONS = {
 };
 
 function App() {
-  // States and Effects
   const [searchTerm, setSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
   const fetchMovies = async (query = "") => {
     setIsLoading(true);
-    setErrorMessage(""); // Clear previous error messages
+    setErrorMessage("");
     try {
       const endpoint = query
         ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
@@ -48,11 +49,8 @@ function App() {
       setMovieList(data.results || []);
 
       if (query && data.results.length > 0) {
-        // Update search count in Appwrite
         await updateSearchCount(query, data.results[0]);
       }
-
-      //catch
     } catch (error) {
       console.error("Error fetching movies:", error);
       setErrorMessage("Failed to fetch movies. Please try again later.");
@@ -95,7 +93,10 @@ function App() {
             <h2>Trending Movies</h2>
             <ul>
               {trendingMovies.map((movie, index) => (
-                <li key={movie.$id}>
+                <li
+                  key={movie.$id}
+                  onClick={() => setSelectedMovieId(movie.movie_id)}
+                >
                   <p>{index + 1}</p>
                   <img src={movie.poster_url} alt={movie.title} />
                 </li>
@@ -114,12 +115,22 @@ function App() {
           ) : (
             <ul>
               {movieList.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  onClick={() => setSelectedMovieId(movie.id)}
+                />
               ))}
             </ul>
           )}
         </section>
       </div>
+
+      <MovieModal
+        movieId={selectedMovieId}
+        onClose={() => setSelectedMovieId(null)}
+        onSelectMovie={setSelectedMovieId}
+      />
     </main>
   );
 }

@@ -38,7 +38,7 @@ const GENRE_COLORS = [
   },
 ];
 
-function MovieModal({ movieId, onClose }) {
+function MovieModal({ movieId, onClose, onSelectMovie }) {
   const [details, setDetails] = useState(null);
   const [similar, setSimilar] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -139,7 +139,7 @@ function MovieModal({ movieId, onClose }) {
                 <h4>More Like This</h4>
                 <ul>
                   {similar.map((movie) => (
-                    <li key={movie.id}>
+                    <li key={movie.id} onClick={() => onSelectMovie(movie.id)}>
                       <img
                         src={
                           movie.poster_path
