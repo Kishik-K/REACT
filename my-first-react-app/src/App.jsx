@@ -45,8 +45,12 @@ function App() {
       }
 
       setMovieList(data.results || []);
-      setIsLoading(false);
-      updateSearchCount(); // Call the function to update search count
+
+      if (query && data.results.length > 0) {
+        // Update search count in Appwrite
+        await updateSearchCount(query, data.results[0]);
+      }
+
       //catch
     } catch (error) {
       console.error("Error fetching movies:", error);
