@@ -3,7 +3,7 @@ import Search from "./components/search";
 import Spinner from "./components/spinner";
 import MovieCard from "./components/movieCard";
 import { useDebounce } from "use-debounce";
-import { updateSearchCount } from "./appwrite";
+import { updateSearchCount, getTrendingMovies } from "./appwrite";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -58,6 +58,14 @@ function App() {
       setErrorMessage("Failed to fetch movies. Please try again later.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const loadTrendingMovies = async () => {
+    try {
+      const movies = await getTrendingMovies();
+    } catch (error) {
+      console.error("Error fetching trending movies:", error);
     }
   };
 
