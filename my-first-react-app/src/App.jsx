@@ -74,6 +74,8 @@ function App() {
     fetchMovies(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
 
+  useEffect(() => {}, []);
+
   return (
     <main>
       <div className="pattern" />
