@@ -105,7 +105,7 @@ function App() {
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </header>
 
-        {trendingMovies.length > 0 && (
+        {trendingMovies.length > 0 && !searchTerm && (
           <section className="trending">
             <h2>Trending Movies</h2>
             <ul>
