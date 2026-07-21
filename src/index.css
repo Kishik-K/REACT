@@ -99,6 +99,30 @@
       transform: scale(1.05);
     }
   }
+  .load-more {
+    @apply flex justify-center mt-10;
+
+    & button {
+      @apply px-8 py-3 rounded-full font-semibold text-sm tracking-wide;
+      background: rgba(184, 68, 60, 0.15);
+      color: #d98e88;
+      border: 1px solid rgba(184, 68, 60, 0.35);
+      cursor: pointer;
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+      &:hover:not(:disabled) {
+        background: rgba(184, 68, 60, 0.3);
+        transform: translateY(-2px);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
 
   .wrapper {
     @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
