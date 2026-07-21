@@ -21,17 +21,20 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
-  const fetchMovies = async (query = "") => {
-    setIsLoading(true);
+  const fetchMovies = async (query = "", page = 1) => {
+    page === 1 ? setIsLoading(true) : setIsLoadingMore(true);
     setErrorMessage("");
     try {
       const endpoint = query
-        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc&`;
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${page}`
+        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc&page=${page}`;
       const response = await fetch(endpoint, API_OPTIONS);
 
       if (!response.ok) {
@@ -46,9 +49,13 @@ function App() {
         return;
       }
 
-      setMovieList(data.results || []);
+      setMovieList((prev) =>
+        page === 1 ? data.results || [] : [...prev, ...(data.results || [])],
+      );
+      setTotalPages(data.total_pages || 1);
+      setCurrentPage(page);
 
-      if (query && data.results.length > 0) {
+      if (query && page === 1 && data.results.length > 0) {
         await updateSearchCount(query, data.results[0]);
       }
     } catch (error) {
@@ -56,6 +63,7 @@ function App() {
       setErrorMessage("Failed to fetch movies. Please try again later.");
     } finally {
       setIsLoading(false);
+      setIsLoadingMore(false);
     }
   };
 
@@ -74,8 +82,13 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleLoadMore = () => {
+    fetchMovies(debouncedSearchTerm, currentPage + 1);
+  };
+
   useEffect(() => {
-    fetchMovies(debouncedSearchTerm);
+    setCurrentPage(1);
+    fetchMovies(debouncedSearchTerm, 1);
   }, [debouncedSearchTerm]);
 
   useEffect(() => {
@@ -130,15 +143,25 @@ function App() {
           ) : errorMessage ? (
             <p className="text-red-500">{errorMessage}</p>
           ) : (
-            <ul>
-              {movieList.map((movie) => (
-                <MovieCard
-                  key={movie.id}
-                  movie={movie}
-                  onClick={() => setSelectedMovieId(movie.id)}
-                />
-              ))}
-            </ul>
+            <>
+              <ul>
+                {movieList.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    onClick={() => setSelectedMovieId(movie.id)}
+                  />
+                ))}
+              </ul>
+
+              {currentPage < totalPages && (
+                <div className="load-more">
+                  <button onClick={handleLoadMore} disabled={isLoadingMore}>
+                    {isLoadingMore ? "Loading..." : "Load More"}
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </section>
       </div>
