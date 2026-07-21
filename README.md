@@ -11,6 +11,9 @@ A cinematic, editorial-styled movie discovery app — search, live trending anal
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Appwrite](https://img.shields.io/badge/Appwrite-Backend-FD366E?style=flat-square&logo=appwrite&logoColor=white)](https://appwrite.io/)
 [![TMDB](https://img.shields.io/badge/TMDB-API-01D277?style=flat-square&logo=themoviedatabase&logoColor=white)](https://www.themoviedb.org/)
+[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com/)
+
+### 🔗 [Live Demo](https://le-carnet-five.vercel.app/)
 
 </div>
 
@@ -76,6 +79,7 @@ It pulls live data from **The Movie Database (TMDB)** for search and film metada
 | **Backend / analytics** | Appwrite Databases — tracks search terms and frequency |
 | **State management** | React `useState` / `useEffect`, no external state library |
 | **Debouncing** | `use-debounce` |
+| **Deployment** | Vercel (CI/CD via GitHub integration) |
 
 <br/>
 
@@ -169,7 +173,7 @@ Le-Carnet/
 - [ ] User accounts with personal watchlists and watched history
 - [ ] Star ratings and review notes per film
 - [ ] Filter/sort by genre, year, and rating
-- [ ] Deploy live demo
+- [x] Deploy live demo
 
 <br/>
 
